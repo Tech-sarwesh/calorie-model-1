@@ -21,6 +21,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Root endpoint (fix for 404 at /)
+@app.get("/")
+def root():
+    return {"message": "Welcome to Calorie Prediction API! Use /predict endpoint with POST method. Code by Tech_sarwesh"}
+
 # Pydantic model for input
 class People(BaseModel):
     age: Annotated[int, Field(..., gt=15, lt=60, description='Age of person between 15-60')]
